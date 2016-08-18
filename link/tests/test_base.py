@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 
 from link import utils, models
@@ -29,3 +30,11 @@ class ModelTestCase(TestCase):
         # ensure that links with view names selected render the correct string
         link.view_name = "link-1"
         self.assertEqual(link.get_absolute_url(), "/link/1/")
+
+        # ensure that links with target objects render the correct string
+        link.target_content_type = ContentType.objects.get(
+            app_label="link", model="link"
+        )
+        link.target_object_id = link.pk
+        link.view_name = None
+        self.assertEqual(link.get_absolute_url(), "/link-1/")

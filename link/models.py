@@ -13,7 +13,8 @@ class Link(models.Model):
         max_length=256,
         blank=True,
         null=True,
-        help_text="Some titles may be the same. A subtitle makes a distinction. It is not displayed on the site.",
+        help_text="Some titles may be the same. A subtitle makes a distinction.\
+                  It is not displayed on the site.",
     )
     view_name = models.CharField(
         max_length=256,
@@ -22,7 +23,8 @@ class Link(models.Model):
         null=True,
     )
     target_content_type = models.ForeignKey(
-        ContentType, blank=True, null=True, related_name="link_target_content_type"
+        ContentType, blank=True, null=True,
+        related_name="link_target_content_type"
     )
     target_object_id = models.PositiveIntegerField(blank=True, null=True)
     target = GenericForeignKey(
@@ -68,7 +70,7 @@ class Link(models.Model):
             except NoReverseMatch:
                 return self.url
 
-            # /abc and /today/abc must be transformed into /today/abc
+            # /abc and /root/abc must be transformed into /root/abc
             if not self.url.startswith(root):
                 return root.rstrip("/") + "/" + self.url.lstrip("/")
 
