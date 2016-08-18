@@ -8,4 +8,4 @@ from link import utils, models
 
 class UtilsTestCase(TestCase):
     def test_get_view_names(self):
-        print utils.get_view_names()
+        self.assertEqual(utils.get_view_names(), ["link-1", "link-2"])
