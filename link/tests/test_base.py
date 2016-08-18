@@ -28,13 +28,13 @@ class ModelTestCase(TestCase):
         self.assertEqual(link.get_absolute_url(), "/link-1/")
 
         # ensure that links with view names selected render the correct string
-        link.view_name = "link-1"
-        self.assertEqual(link.get_absolute_url(), "/link/1/")
+        link.view_name = "link-2"
+        self.assertEqual(link.get_absolute_url(), "/link/2/")
 
         # ensure that links with target objects render the correct string
-        link.target_content_type = ContentType.objects.get(
-            app_label="link", model="link"
-        )
-        link.target_object_id = link.pk
+        content_link_data = self.link_data.copy()
+        content_link_data["url"] = "/content/1/"
+        content_link = models.Link.objects.create(**content_link_data)
         link.view_name = None
-        self.assertEqual(link.get_absolute_url(), "/link-1/")
+        link.target = content_link
+        self.assertEqual(link.get_absolute_url(), "/content/1/")

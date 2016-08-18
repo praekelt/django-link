@@ -27,9 +27,7 @@ class Link(models.Model):
         related_name="link_target_content_type"
     )
     target_object_id = models.PositiveIntegerField(blank=True, null=True)
-    target = GenericForeignKey(
-        "target_content_type", "target_object_id"
-    )
+    target = GenericForeignKey("target_content_type", "target_object_id")
     url = models.CharField(
         max_length=256,
         help_text="URL to which this link will redirect.",
