@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse, NoReverseMatch
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
@@ -25,7 +25,7 @@ class Link(models.Model):
         ContentType, blank=True, null=True, related_name="link_target_content_type"
     )
     target_object_id = models.PositiveIntegerField(blank=True, null=True)
-    target = generic.GenericForeignKey(
+    target = GenericForeignKey(
         "target_content_type", "target_object_id"
     )
     url = models.CharField(
