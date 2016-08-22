@@ -15,3 +15,7 @@ def get_view_names(urlpatterns=URLS, view_names=[], namespace=None):
             view_name = pattern.name
             view_names.append(view_name)
     return view_names
+
+
+def get_view_name_choices():
+    return [tuple([view, view]) for view in get_view_names()]
