@@ -1,5 +1,6 @@
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.test.client import Client
 
 from link import utils, models
 
@@ -13,7 +14,6 @@ class ModelTestCase(TestCase):
     def setUp(self):
         self.link_data = {
             "title": "Link 1 Title",
-            "subtitle": "Link 1 Subtitle",
             "url": "/link-1/"
         }
 
@@ -38,3 +38,24 @@ class ModelTestCase(TestCase):
         link.view_name = None
         link.target = content_link
         self.assertEqual(link.get_absolute_url(), "/content/1/")
+
+
+class AdminTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.editor = get_user_model().objects.create(
+            username="editor",
+            email="editor@test.com",
+            is_superuser=True,
+            is_staff=True
+        )
+        self.editor.set_password("password")
+        self.editor.save()
+        self.client.login(username='editor', password='password')
+
+    def test_admin(self):
+        response = self.client.post("/admin/")
+        self.assertEqual(response.status_code, 200)
+
+    def tearDown(self):
+        self.client.logout()
