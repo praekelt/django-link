@@ -6,9 +6,6 @@ from link.utils import get_view_name_choices
 
 
 class LinkAdminForm(forms.ModelForm):
-    """
-    Link admin class.
-    """
     view_name = forms.ChoiceField(
         label="View Name",
         help_text="View name to which this link will redirect.",
@@ -17,10 +14,15 @@ class LinkAdminForm(forms.ModelForm):
 
     class Meta:
         model = Link
+        fields = [
+            "title", "view_name", "target_content_type", "target_object_id",
+            "url"
+        ]
 
     def __init__(self, *args, **kwargs):
         """
-        Set view_name choices to url pattern names.
+        Set view_name choices to the availbale url pattern names.
+        See utils.get_view_name_choices.
         """
         view_name_choices = [("", "-- Select --"), ] + get_view_name_choices()
         self.declared_fields["view_name"].choices = view_name_choices
