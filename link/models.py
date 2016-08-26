@@ -7,13 +7,13 @@ from django.db import models
 class Link(models.Model):
     title = models.CharField(
         max_length=256,
-        help_text="A short descriptive title.",
+        help_text="A short descriptive title."
     )
     view_name = models.CharField(
         max_length=256,
         help_text="View name to which this link will redirect.",
         blank=True,
-        null=True,
+        null=True
     )
     target_content_type = models.ForeignKey(
         ContentType, blank=True, null=True,
@@ -25,7 +25,7 @@ class Link(models.Model):
         max_length=256,
         help_text="URL to which this link will redirect.",
         blank=True,
-        null=True,
+        null=True
     )
 
     class Meta:
