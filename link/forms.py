@@ -34,7 +34,7 @@ class LinkAdminForm(forms.ModelForm):
         selected.
         """
         cleaned_data = super(LinkAdminForm, self).clean()
-        fieldnames = ["view_name", "target", "url"]
+        fieldnames = ["view_name", "target_content_type", "url"]
         for count, fieldname in enumerate(fieldnames):
             if cleaned_data[fieldname]:
                 if count:

@@ -57,5 +57,11 @@ class AdminTestCase(TestCase):
         response = self.client.post("/admin/")
         self.assertEqual(response.status_code, 200)
 
+    def test_admin_link(self):
+
+        # ensure the link add page can be reached
+        response = self.client.post("/admin/link/link/add/")
+        self.assertEqual(response.status_code, 200)
+
     def tearDown(self):
         self.client.logout()
