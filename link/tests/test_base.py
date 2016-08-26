@@ -7,7 +7,10 @@ from link import utils, models
 
 class UtilsTestCase(TestCase):
     def test_get_view_names(self):
-        self.assertEqual(utils.get_view_names(), ["link-1", "link-2"])
+        self.assertEqual(
+            utils.get_view_names(),
+            ["link-1", "link-2", "testapp:link-1", "testapp:link-2"]
+        )
 
 
 class ModelTestCase(TestCase):
@@ -51,7 +54,7 @@ class AdminTestCase(TestCase):
         )
         self.editor.set_password("password")
         self.editor.save()
-        self.client.login(username='editor', password='password')
+        self.client.login(username="editor", password="password")
 
     def test_admin(self):
         response = self.client.post("/admin/")
