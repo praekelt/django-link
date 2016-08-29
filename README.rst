@@ -37,4 +37,4 @@ To use include the link object in the context of your view and include the follo
 ``{{ link.get_absolute_url  }}``
 
 Or use the inclusion tag which has been provided:
-``{% render_link object %}``
+``{% render_link object %}`` 
