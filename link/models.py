@@ -9,6 +9,10 @@ class Link(models.Model):
         max_length=256,
         help_text="A short descriptive title."
     )
+    slug = models.SlugField(
+        max_length=256,
+        db_index=True,
+    )
     view_name = models.CharField(
         max_length=256,
         help_text="View name to which this link will redirect.",
