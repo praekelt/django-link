@@ -5,11 +5,11 @@ from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 
 from link import SETTINGS
 
-def get_view_names(urlpatterns=[], view_names=[], namespace=None):
-    urlpatterns = urlpatterns or import_module(settings.ROOT_URLCONF).urlpatterns
-    view_names = view_names or []
-    namespace = namespace or None
-    if namespace not in SETTINGS.get("EXCLUDED_VIEWNAME_CHOICES", []):
+
+def get_view_names(urlpatterns=None, view_names=[], namespace=None):
+    if urlpatterns is None:
+        urlpatterns = import_module(settings.ROOT_URLCONF).urlpatterns
+    if namespace not in SETTINGS.get("EXCLUDED_VIEWNAME_CHOICES"):
         for pattern in urlpatterns:
             if isinstance(pattern, RegexURLResolver):
                 get_view_names(
@@ -17,9 +17,11 @@ def get_view_names(urlpatterns=[], view_names=[], namespace=None):
                 )
             elif isinstance(pattern, RegexURLPattern):
                 view_name = pattern.name
-                if namespace:
-                    view_name = "%s:%s" % (namespace, pattern.name)
-                view_names.append(view_name)
+                if view_name:
+                    if namespace:
+                        view_name = "%s:%s" % (namespace, view_name)
+                    if view_name not in view_names:
+                        view_names.append(view_name)
     return view_names
 
 
