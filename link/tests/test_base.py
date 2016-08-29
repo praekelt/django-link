@@ -9,7 +9,7 @@ class UtilsTestCase(TestCase):
     def test_get_view_names(self):
         self.assertEqual(
             utils.get_view_names(),
-            ["link-1", "link-2", "testapp:link-1", "testapp:link-2"]
+            ["link-1", "link-2", "link:link-list", "link:link-detail"]
         )
 
 
@@ -68,3 +68,17 @@ class AdminTestCase(TestCase):
 
     def tearDown(self):
         self.client.logout()
+
+
+class ViewTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_detail(self):
+        pass
+
+    def test_list(self):
+        pass
+
+    def tearDown(self):
+        pass
