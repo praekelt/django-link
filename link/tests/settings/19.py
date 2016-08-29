@@ -12,6 +12,7 @@ ROOT_URLCONF = "link.tests.urls"
 INSTALLED_APPS = [
     "test_without_migrations",
     "link",
+    "link.tests",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
