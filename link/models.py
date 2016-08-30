@@ -36,10 +36,7 @@ class Link(models.Model):
         ordering = ["title"]
 
     def __unicode__(self):
-        if self.subtitle:
-            return "%s (%s)" % (self.title, self.subtitle)
-        else:
-            return self.title
+        return self.title
 
     def get_absolute_url(self):
         """
