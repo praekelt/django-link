@@ -16,7 +16,7 @@ Installation
 
 #. Add ``link`` to your ``INSTALLED_APPS`` setting.
 
-#. Add ``url(r'^link/', include("link.urls", namespace="link"))`` to your ``url patterns``
+#. Add ``url(r'^link/', include("link.urls", namespace="link"))`` to your ``url patterns`` (only required if you intend on using the list/detail views)
 
 Note: ``django-link`` relies on ``"django.contrib.contenttypes"`` framework so
 this will need to be included in your ``INSTALLED_APPS`` setting.
@@ -37,4 +37,4 @@ To use include the link object in the context of your view and include the follo
 ``{{ link.get_absolute_url  }}``
 
 Or use the inclusion tag which has been provided:
-``{% render_link object %}`` 
+``{% render_link object %}``
