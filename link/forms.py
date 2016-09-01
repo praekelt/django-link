@@ -6,12 +6,6 @@ from link.utils import get_view_name_choices
 
 
 class LinkAdminForm(forms.ModelForm):
-    view_name = forms.ChoiceField(
-        label="View Name",
-        help_text="View name to which this link will redirect.",
-        required=False
-    )
-
     class Meta:
         model = Link
         fields = [
@@ -22,23 +16,24 @@ class LinkAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """
         Set view_name choices to the availbale url pattern names.
-        See utils.get_view_name_choices.
         """
-        view_name_choices = [("", "-- Select --"), ] + get_view_name_choices()
-        self.declared_fields["view_name"].choices = view_name_choices
         super(LinkAdminForm, self).__init__(*args, **kwargs)
+
+        view_name_choices = [("", "-- Select --"), ] + get_view_name_choices()
+        self.fields["view_name"].choices = view_name_choices
 
     def clean(self):
         """
-        Adds validation to ensure that at least a view_name, target or url is
+        Adds validation to ensure that only one view_name, target or url is
         selected.
         """
         cleaned_data = super(LinkAdminForm, self).clean()
-        fieldnames = ["view_name", "target_content_type", "url"]
-        for count, fieldname in enumerate(fieldnames):
+        field_count = 0
+        for fieldname in ["view_name", "target_content_type", "url"]:
             if cleaned_data[fieldname]:
-                if count:
+                if field_count:
                     raise forms.ValidationError(
                         "You may set at most one of view_name, target or URL."
                     )
+                field_count += 1
         return cleaned_data
