@@ -36,4 +36,10 @@ class LinkAdminForm(forms.ModelForm):
                         "You may set at most one of view_name, target or URL."
                     )
                 field_count += 1
+
+        if not field_count:
+            raise forms.ValidationError(
+                "You may set at least one of view_name, target or URL."
+            )
+
         return cleaned_data

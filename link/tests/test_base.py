@@ -1,8 +1,9 @@
 from django.contrib.auth import get_user_model
+from django.forms import ValidationError
 from django.test import TestCase
 from django.test.client import Client
 
-from link import utils, models
+from link import forms, models, utils
 
 
 class UtilsTestCase(TestCase):
@@ -95,6 +96,36 @@ class ViewTestCase(TestCase):
         response = self.client.get("/link/")
         self.assertContains(response, self.link_data["title"])
         self.assertContains(response, link_data2["title"])
+
+    def tearDown(self):
+        pass
+
+
+class FormTestCase(TestCase):
+    def setUp(self):
+        self.form_data = {
+            "title": "Link 1 Title",
+            "slug": "link-1-title"
+        }
+
+    def test_admin_form(self):
+
+        # ensure that not selecting a target raises a validation error
+        admin_form = forms.LinkAdminForm(self.form_data)
+        admin_form.full_clean()
+        self.assertEqual(len(admin_form.errors["__all__"]), 1)
+
+        # ensure the form is valid
+        self.form_data["url"] = "/test-link/"
+        admin_form = forms.LinkAdminForm(self.form_data)
+        self.assertTrue(admin_form.is_valid())
+        self.assertEqual(len(admin_form.errors), 0)
+
+        # ensure that selecting multiple targets fails
+        self.form_data["view_name"] = "test-view"
+        admin_form = forms.LinkAdminForm(self.form_data)
+        admin_form.full_clean()
+        self.assertEqual(len(admin_form.errors["__all__"]), 1)
 
     def tearDown(self):
         pass
