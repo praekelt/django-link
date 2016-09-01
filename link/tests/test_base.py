@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.forms import ValidationError
 from django.test import TestCase
 from django.test.client import Client
 
