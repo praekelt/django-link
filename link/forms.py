@@ -15,8 +15,8 @@ class LinkAdminForm(forms.ModelForm):
     class Meta:
         model = Link
         fields = [
-            "title", "view_name", "target_content_type", "target_object_id",
-            "url"
+            "title", "slug", "view_name", "target_content_type",
+            "target_object_id", "url"
         ]
 
     def __init__(self, *args, **kwargs):

@@ -7,6 +7,7 @@ from link.models import Link
 class LinkAdmin(admin.ModelAdmin):
     form = LinkAdminForm
     list_display = ("title", "_get_absolute_url")
+    prepopulated_fields = {"slug": ["title"]}
 
     def _get_absolute_url(self, obj):
         url = obj.get_absolute_url()
