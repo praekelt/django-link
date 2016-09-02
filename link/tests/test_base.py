@@ -121,7 +121,7 @@ class FormTestCase(TestCase):
         self.assertEqual(len(admin_form.errors), 0)
 
         # ensure that selecting multiple targets fails
-        self.form_data["view_name"] = "test-view"
+        self.form_data["view_name"] = "link-1"
         admin_form = forms.LinkAdminForm(self.form_data)
         admin_form.full_clean()
         self.assertEqual(len(admin_form.errors["__all__"]), 1)

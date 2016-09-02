@@ -19,10 +19,10 @@ class LinkAdminForm(forms.ModelForm):
         """
         Set view_name choices to the availbale url pattern names.
         """
-        view_name_choices = [("", "-- Select --"), ] + get_view_name_choices()
-        self.declared_fields["view_name"].choices = view_name_choices
-
         super(LinkAdminForm, self).__init__(*args, **kwargs)
+
+        view_name_choices = [("", "-- Select --"), ] + get_view_name_choices()
+        self.fields["view_name"].choices = view_name_choices
 
     def clean(self):
         """
@@ -32,7 +32,7 @@ class LinkAdminForm(forms.ModelForm):
         cleaned_data = super(LinkAdminForm, self).clean()
         field_count = 0
         for fieldname in ["view_name", "target_content_type", "url"]:
-            if cleaned_data[fieldname]:
+            if cleaned_data.get(fieldname):
                 if field_count:
                     raise forms.ValidationError(
                         "You may set at most one of view_name, target or URL."
