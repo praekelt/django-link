@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.functional import cached_property
 
 
 class Link(models.Model):
@@ -38,6 +39,7 @@ class Link(models.Model):
     def __unicode__(self):
         return self.title
 
+    @cached_property
     def get_absolute_url(self):
         """
         Returns URL to which link should redirect based on a reversed view
