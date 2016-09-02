@@ -57,13 +57,13 @@ class AdminTestCase(TestCase):
         self.client.login(username="editor", password="password")
 
     def test_admin(self):
-        response = self.client.post("/admin/")
+        response = self.client.get("/admin/")
         self.assertEqual(response.status_code, 200)
 
     def test_admin_link(self):
 
         # ensure the link add page can be reached
-        response = self.client.post("/admin/link/link/add/")
+        response = self.client.get("/admin/link/link/add/")
         self.assertEqual(response.status_code, 200)
 
     def tearDown(self):
