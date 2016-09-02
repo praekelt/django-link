@@ -9,7 +9,7 @@ class LinkAdminForm(forms.ModelForm):
     class Meta:
         model = Link
         fields = [
-            "title", "slug", "view_name", "target_content_type",
+            "title", "slug", "view_name", "view_params", "target_content_type",
             "target_object_id", "url"
         ]
 

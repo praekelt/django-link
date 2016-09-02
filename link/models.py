@@ -2,7 +2,11 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.utils.functional import cached_property
+
+
+class ViewParam(models.Model):
+    key = models.CharField(max_length=64)
+    value = models.CharField(max_length=256)
 
 
 class Link(models.Model):
@@ -15,10 +19,11 @@ class Link(models.Model):
         db_index=True,
     )
     view_name = models.CharField(
-        max_length=256,
-        help_text="View name to which this link will redirect.",
-        blank=True,
-        null=True
+        max_length=256, blank=True, null=True,
+        help_text="View name to which this link will redirect."
+    )
+    view_params = models.ManyToManyField(
+        ViewParam, blank=True, null=True
     )
     target_content_type = models.ForeignKey(
         ContentType, blank=True, null=True,
@@ -27,10 +32,8 @@ class Link(models.Model):
     target_object_id = models.PositiveIntegerField(blank=True, null=True)
     target = GenericForeignKey("target_content_type", "target_object_id")
     url = models.CharField(
-        max_length=256,
-        help_text="URL to which this link will redirect.",
-        blank=True,
-        null=True
+        max_length=256, blank=True, null=True,
+        help_text="URL to which this link will redirect."
     )
 
     class Meta:
@@ -39,14 +42,16 @@ class Link(models.Model):
     def __unicode__(self):
         return self.title
 
-    @cached_property
     def get_absolute_url(self):
         """
         Returns URL to which link should redirect based on a reversed view
         name, category, target or explicitly provided URL.
         """
         if self.view_name:
-            return reverse(self.view_name)
+            kwargs = dict(
+                (param.key, param.value) for param in self.view_params.all()
+            )
+            return reverse(self.view_name, kwargs=kwargs)
         elif self.target:
             return self.target.get_absolute_url()
         else:
