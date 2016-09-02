@@ -48,7 +48,8 @@ class Link(models.Model):
     def __unicode__(self):
         return self.title
 
-    def get_absolute_url(self):
+    @property
+    def absolute_url(self):
         """
         Returns URL to which link should redirect based on a reversed view
         name, category, target or explicitly provided URL.
