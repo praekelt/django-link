@@ -57,9 +57,15 @@ class Link(models.Model):
             kwargs = dict(
                 (param.key, param.value) for param in self.view_params.all()
             )
-            return reverse(self.view_name, kwargs=kwargs)
+            try:
+                return reverse(self.view_name, kwargs=kwargs)
+            except NoReverseMatch:
+                pass
         elif self.target:
-            return self.target.get_absolute_url()
+            try:
+                return self.target.get_absolute_url()
+            except AttributeError:
+                pass
         else:
             # Django can be served in a subdirectory. Transparently fix urls.
             if "://" in self.url:
@@ -79,4 +85,4 @@ class Link(models.Model):
             if not self.url.startswith(root):
                 return root.rstrip("/") + "/" + self.url.lstrip("/")
 
-            return self.url
+        return self.url
