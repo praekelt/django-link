@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from link.forms import LinkAdminForm
-from link.models import Link
+from link.models import Link, ViewParam
 
 
 class LinkAdmin(admin.ModelAdmin):
@@ -18,3 +18,4 @@ class LinkAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Link, LinkAdmin)
+admin.site.register(ViewParam)
