@@ -8,6 +8,7 @@ class LinkAdmin(admin.ModelAdmin):
     form = LinkAdminForm
     list_display = ("title", "_get_absolute_url")
     prepopulated_fields = {"slug": ["title"]}
+    filter_horizontal = ["view_params"]
 
     def _get_absolute_url(self, obj):
         url = obj.get_absolute_url()

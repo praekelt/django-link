@@ -6,6 +6,8 @@ from link.utils import get_view_name_choices
 
 
 class LinkAdminForm(forms.ModelForm):
+    view_name = forms.ChoiceField(required=False)
+
     class Meta:
         model = Link
         fields = [
@@ -17,10 +19,10 @@ class LinkAdminForm(forms.ModelForm):
         """
         Set view_name choices to the availbale url pattern names.
         """
-        super(LinkAdminForm, self).__init__(*args, **kwargs)
-
         view_name_choices = [("", "-- Select --"), ] + get_view_name_choices()
-        self.fields["view_name"].choices = view_name_choices
+        self.declared_fields["view_name"].choices = view_name_choices
+
+        super(LinkAdminForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         """
