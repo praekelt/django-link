@@ -8,6 +8,12 @@ class ViewParam(models.Model):
     key = models.CharField(max_length=64)
     value = models.CharField(max_length=256)
 
+    class Meta:
+        ordering = ["key"]
+
+    def __unicode__(self):
+        return "%s:%s" % (self.key, self.value)
+
 
 class Link(models.Model):
     title = models.CharField(
