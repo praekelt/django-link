@@ -12,7 +12,9 @@ class LinkAdmin(admin.ModelAdmin):
 
     def _get_absolute_url(self, obj):
         url = obj.get_absolute_url()
-        return "<a href=\"%s\" target=\"public\">%s</a>" % (url, url)
+        if url:
+            return "<a href=\"%s\" target=\"public\">%s</a>" % (url, url)
+        return "<p class=\"errornote\">Inactive or broken link</p>"
 
     _get_absolute_url.short_description = "Permalink"
     _get_absolute_url.allow_tags = True
