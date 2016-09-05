@@ -18,6 +18,8 @@ Installation
 
 #. Add ``url(r'^link/', include("link.urls", namespace="link"))`` to your ``url patterns`` (only required if you intend on using the list/detail views)
 
+#. To exclude certain apps from the view name choice field add the namespace to: ``settings.LINK["EXCLUDED_VIEWNAME_CHOICES"]``
+
 Note: ``django-link`` relies on ``"django.contrib.contenttypes"`` framework so
 this will need to be included in your ``INSTALLED_APPS`` setting.
 
@@ -31,7 +33,7 @@ method on the model which provides the url to either of these url types:
 
 #. Link to an ``object`` provided by the contenttype framework.
 
-#. Link to a pre-existing view.
+#. Link to a pre-existing view with configurable view params.
 
 To use include the link object in the context of your view and include the following code:
 ``{{ link.get_absolute_url  }}``
