@@ -7,16 +7,13 @@ from link.models import Link
 
 
 class PropertiesMixin(serializers.Serializer):
-    absolute_url = ReadOnlyField()
+    absolute_url = serializers.ReadOnlyField()
 
     class Meta:
         fields = ("absolute_url")
 
 
-class LinkSerializer(
-    PropertiesMixin, serializers.HyperlinkedModelSerializer
-    ):
-
+class LinkSerializer(PropertiesMixin, serializers.HyperlinkedModelSerializer):
     # xxx: meta may need to be Meta(serializers.HyperlinkedModelSerializer)
     class Meta:
         model = Link
@@ -29,8 +26,5 @@ class LinkObjectsViewSet(viewsets.ModelViewSet):
 
 def register(router):
     return djangorestframework_extras.register(
-        router,
-        (
-            ("link-link", LinkObjectsViewSet)
-        )
+        router, (("link-link", LinkObjectsViewSet))
     )
