@@ -9,7 +9,7 @@ from link import SETTINGS
 def get_view_names(urlpatterns=None, view_names=[], namespace=None):
     if urlpatterns is None:
         urlpatterns = import_module(settings.ROOT_URLCONF).urlpatterns
-    if namespace not in SETTINGS.get("EXCLUDED_VIEWNAME_CHOICES"):
+    if namespace not in SETTINGS.get("excluded-viewname-choices"):
         for pattern in urlpatterns:
             if isinstance(pattern, RegexURLResolver):
                 get_view_names(
