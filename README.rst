@@ -37,7 +37,7 @@ To use include the link object in the context of your view and include the follo
 ``{{ link.get_absolute_url  }}``
 
 Or use the inclusion tag which has been provided:
-``{% render_link object %}``
+``{% render_link slug %}``
 
 To exclude certain apps from the view name choice field add the namespace in your settings:
 ``LINK = {"excluded-viewname-choices": ["admin"]}``
