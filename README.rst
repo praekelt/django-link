@@ -2,9 +2,11 @@ Django Link
 ===========
 **Modeled link objects which include linking to objects, views and static urls.**
 
-.. figure:: https://travis-ci.org/praekelt/django-link.svg?branch=develop
-   :align: center
-   :alt: Travis
+.. image:: https://travis-ci.org/praekelt/django-link.svg?branch=develop
+    :target: https://travis-ci.org/praekelt/django-link
+
+.. image:: https://coveralls.io/repos/github/praekelt/django-link/badge.svg?branch=develop
+    :target: https://coveralls.io/github/praekelt/django-link?branch=develop
 
 .. contents:: Contents
     :depth: 5
