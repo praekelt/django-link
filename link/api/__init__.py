@@ -10,7 +10,7 @@ class PropertiesMixin(serializers.Serializer):
     absolute_url = serializers.ReadOnlyField()
 
     class Meta(object):
-        fields = ("absolute_url")
+        fields = ("absolute_url", )
 
 
 class LinkSerializer(PropertiesMixin, serializers.HyperlinkedModelSerializer):
