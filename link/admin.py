@@ -9,6 +9,9 @@ class LinkAdmin(admin.ModelAdmin):
     list_display = ("title", "_get_absolute_url")
     prepopulated_fields = {"slug": ["title"]}
     filter_horizontal = ["view_params"]
+    search_fields = [
+        "title", "slug", "url"
+    ]
 
     def _get_absolute_url(self, obj):
         url = obj.get_absolute_url()
