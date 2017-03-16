@@ -43,3 +43,8 @@ Or use the inclusion tag which has been provided:
 
 To exclude certain apps from the view name choice field add the namespace in your settings:
 ``LINK = {"excluded-viewname-choices": ["admin"]}``
+
+License
+-------
+
+Please see the License requirements in the LICENSE file of this repository.
