@@ -6,7 +6,7 @@ setup(
     name="django-link",
     description="Modeled link objects which include linking to objects, views and static urls.",
     long_description="".join([open(f, "r").read() for f in description_files]),
-    version="1.0.0",
+    version="0.1.0",
     author="Praekelt Consulting",
     author_email="dev@praekelt.com",
     license="BSD",
@@ -24,5 +24,6 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     ],
-    zip_safe=False
+    zip_safe=False,
+    include_package_data=True
 )

@@ -2,9 +2,11 @@ Django Link
 ===========
 **Modeled link objects which include linking to objects, views and static urls.**
 
-.. figure:: https://travis-ci.org/praekelt/django-link.svg?branch=develop
-   :align: center
-   :alt: Travis
+.. image:: https://travis-ci.org/praekelt/django-link.svg?branch=develop
+    :target: https://travis-ci.org/praekelt/django-link
+
+.. image:: https://coveralls.io/repos/github/praekelt/django-link/badge.svg?branch=develop
+    :target: https://coveralls.io/github/praekelt/django-link?branch=develop
 
 .. contents:: Contents
     :depth: 5
@@ -37,7 +39,12 @@ To use include the link object in the context of your view and include the follo
 ``{{ link.get_absolute_url  }}``
 
 Or use the inclusion tag which has been provided:
-``{% render_link object %}``
+``{% render_link slug %}``
 
 To exclude certain apps from the view name choice field add the namespace in your settings:
 ``LINK = {"excluded-viewname-choices": ["admin"]}``
+
+License
+-------
+
+Please see the License requirements in the LICENSE file of this repository.

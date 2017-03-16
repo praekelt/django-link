@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework import serializers
 
-import djangorestframework_extras
+import rest_framework_extras
 
 from link.models import Link
 
@@ -9,13 +9,12 @@ from link.models import Link
 class PropertiesMixin(serializers.Serializer):
     absolute_url = serializers.ReadOnlyField()
 
-    class Meta:
-        fields = ("absolute_url")
+    class Meta(object):
+        fields = ("absolute_url", )
 
 
 class LinkSerializer(PropertiesMixin, serializers.HyperlinkedModelSerializer):
-    # xxx: meta may need to be Meta(serializers.HyperlinkedModelSerializer)
-    class Meta:
+    class Meta(object):
         model = Link
 
 
@@ -25,6 +24,6 @@ class LinkObjectsViewSet(viewsets.ModelViewSet):
 
 
 def register(router):
-    return djangorestframework_extras.register(
-        router, (("link-link", LinkObjectsViewSet))
+    return rest_framework_extras.register(
+        router, (("link-link", LinkObjectsViewSet),)
     )
