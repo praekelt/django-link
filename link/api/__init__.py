@@ -16,6 +16,7 @@ class PropertiesMixin(serializers.Serializer):
 class LinkSerializer(PropertiesMixin, serializers.HyperlinkedModelSerializer):
     class Meta(object):
         model = Link
+        fields = ("absolute_url", )
 
 
 class LinkObjectsViewSet(viewsets.ModelViewSet):
