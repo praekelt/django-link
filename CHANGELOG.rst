@@ -4,6 +4,7 @@ Changelog
 next
 ----
 #. Add missing migrations.
+#. String representation for Python 3.
 
 0.1.1
 -----

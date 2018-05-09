@@ -48,6 +48,8 @@ class Link(models.Model):
     def __unicode__(self):
         return self.title
 
+    __str__ = __unicode__
+
     @property
     def absolute_url(self):
         return self.get_absolute_url()
