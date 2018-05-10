@@ -1,8 +1,8 @@
 Changelog
 =========
 
-next
-----
+2.0.0
+-----
 #. Add missing migrations.
 #. String representation for Python 3.
 #. Django 2 compatibility.
