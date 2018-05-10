@@ -1,7 +1,11 @@
 from importlib import import_module
 
 from django.conf import settings
-from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
+try:
+    from django.urls import URLResolver as RegexURLResolver
+    from django.urls import URLPattern as RegexURLPattern
+except ImportError:
+    from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 
 from link import SETTINGS
 

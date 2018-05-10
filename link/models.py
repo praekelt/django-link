@@ -1,8 +1,10 @@
-from django.core.urlresolvers import reverse, NoReverseMatch
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-
+try:
+    from django.urls import reverse, NoReverseMatch
+except ImportError:
+    from django.core.urlresolvers import reverse, NoReverseMatch
 
 class ViewParam(models.Model):
     key = models.CharField(max_length=64)
@@ -13,6 +15,8 @@ class ViewParam(models.Model):
 
     def __unicode__(self):
         return "%s:%s" % (self.key, self.value)
+
+    __str__ = __unicode__
 
 
 class Link(models.Model):
@@ -33,7 +37,8 @@ class Link(models.Model):
     )
     target_content_type = models.ForeignKey(
         ContentType, blank=True, null=True,
-        related_name="link_target_content_type"
+        related_name="link_target_content_type",
+        on_delete=models.CASCADE
     )
     target_object_id = models.PositiveIntegerField(blank=True, null=True)
     target = GenericForeignKey("target_content_type", "target_object_id")

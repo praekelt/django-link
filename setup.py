@@ -14,7 +14,8 @@ setup(
     packages=find_packages(),
     dependency_links=[],
     install_requires=[
-        "django"
+        "django",
+        "djangorestframework-extras>=0.3"
     ],
     classifiers=[
         "Programming Language :: Python",
