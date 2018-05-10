@@ -4,16 +4,21 @@ from django.test.client import Client
 
 
 class AdminTestCase(TestCase):
-    def setUp(self):
-        self.client = Client()
-        self.editor = get_user_model().objects.create(
+
+    @classmethod
+    def setUpTestData(cls):
+        super(AdminTestCase, cls).setUpTestData()
+        cls.editor = get_user_model().objects.create(
             username="editor",
             email="editor@test.com",
             is_superuser=True,
             is_staff=True
         )
-        self.editor.set_password("password")
-        self.editor.save()
+        cls.editor.set_password("password")
+        cls.editor.save()
+
+    def setUp(self):
+        super(AdminTestCase, self).setUp()
         self.client.login(username="editor", password="password")
 
     def test_admin(self):

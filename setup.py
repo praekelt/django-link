@@ -6,7 +6,7 @@ setup(
     name="django-link",
     description="Modeled link objects which include linking to objects, views and static urls.",
     long_description="".join([open(f, "r").read() for f in description_files]),
-    version="0.1.1",
+    version="2.0.0",
     author="Praekelt Consulting",
     author_email="dev@praekelt.com",
     license="BSD",
@@ -14,7 +14,8 @@ setup(
     packages=find_packages(),
     dependency_links=[],
     install_requires=[
-        "django"
+        "django",
+        "djangorestframework-extras>=0.3"
     ],
     classifiers=[
         "Programming Language :: Python",
