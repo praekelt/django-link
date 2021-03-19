@@ -1,5 +1,5 @@
 django>=2.0,<2.1
 django-test-without-migrations==0.6
-djangorestframework==3.8.0
+djangorestframework==3.11.2
 djangorestframework-extras==0.3.0
 six==1.9.0
